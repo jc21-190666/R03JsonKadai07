@@ -1,10 +1,10 @@
-
 import java.io.Console;
 import java.io.IOException;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -23,16 +23,18 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
 import java.sql.Statement;
+
 
 /**
  * Servlet implementation class GetPointServlet
  */
 
 @WebServlet("/getPoint")
-public class GetPointServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
 
+public class GetPointServlet extends HttpServlet {â€‹
+	private static final long serialVersionUID = 1L;
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
@@ -86,21 +88,21 @@ public class GetPointServlet extends HttpServlet {
 						st2.executeUpdate();
 					}
 					/*
-					 * // SQL•¶‚ÌÀs PreparedStatement pstmt =
+					 * // SQLï¿½ï¿½ï¿½Ìï¿½s PreparedStatement pstmt =
 					 * con.prepareStatement("select * from point_mst"); ResultSet rs =
 					 * pstmt.executeQuery();
 					 */
-					// ŒŸõŒ‹‰Ê‚ğ•\¦
+					// ï¿½ï¿½ï¿½ï¿½Ê‚ï¿½\ï¿½ï¿½
 					
 					
 					
-					// Œãˆ—iƒŠƒ\[ƒX‚ÌƒNƒ[ƒYj
+					// ï¿½ãˆï¿½ï¿½ï¿½iï¿½ï¿½ï¿½\ï¿½[ï¿½Xï¿½ÌƒNï¿½ï¿½ï¿½[ï¿½Yï¿½j
 					rs.close();
 					st.close();
 					con.close();
 					
 				}catch (SQLException e ) {
-					// TODO ©“®¶¬‚³‚ê‚½ catch ƒuƒƒbƒN
+					// TODO ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ê‚½ catch ï¿½uï¿½ï¿½ï¿½bï¿½N
 					e.printStackTrace();
 				
 				} catch (ClassNotFoundException e ) {
@@ -132,8 +134,8 @@ public class GetPointServlet extends HttpServlet {
  * for(String[] s: list) { System.out.println(s[0]); }
  * request.setAttribute("list", list); request.getRequestDispatcher("pass");
  * 
- * } catch (ClassNotFoundException e ) { // TODO ©“®¶¬‚³‚ê‚½ catch ƒuƒƒbƒN
- * e.printStackTrace(); } catch (SQLException e ) { // TODO ©“®¶¬‚³‚ê‚½ catch ƒuƒƒbƒN
+ * } catch (ClassNotFoundException e ) { // TODO ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ê‚½ catch ï¿½uï¿½ï¿½ï¿½bï¿½N
+ * e.printStackTrace(); } catch (SQLException e ) { // TODO ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ê‚½ catch ï¿½uï¿½ï¿½ï¿½bï¿½N
  * e.printStackTrace(); }
  * 
  * String point ="POINT"; String num = "3580";
