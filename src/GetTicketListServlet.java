@@ -28,6 +28,20 @@ public class GetTicketListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		final String driverClassName = "com.mysql.jdbc.Driver";
+		final String url = "jdbc:mysql://192.168.54.190:3306/jsonkadai11";
+		final String id = "jsonkadai11";
+		final String pass = "JsonKadai11";
+		
+		String ticket_id = request.getParameter("ticket_id");
+		String ticket_name = request.getParameter("ticket_name");
+		
+		try {
+			
+		}
+		
+		
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/getTicketList.jsp");
 		rd.forward(request, response);
 	}
