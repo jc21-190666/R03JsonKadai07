@@ -20,6 +20,7 @@ public class GetTicketListServlet extends HttpServlet {
      * @see HttpServlet#HttpServlet()
      */
     public GetTicketListServlet() {
+    	
         super();
         // TODO Auto-generated constructor stub
     }
