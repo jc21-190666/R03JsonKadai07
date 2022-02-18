@@ -25,15 +25,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import java.sql.Statement;
-
-
-/**
- * Servlet implementation class GetPointServlet
- */
-
 @WebServlet("/getPoint")
 
-public class GetPointServlet extends HttpServlet {​
+public class GetPointServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -49,60 +43,76 @@ public class GetPointServlet extends HttpServlet {​
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
 			response.setCharacterEncoding("utf-8");
-				String driverClassName = "com.mysql.jdbc.Driver";
-				String url ="jdbc:mysql://192.168.54.190:3306/jsonkadai07";
-				String user ="jsonkadai07";
-				String password ="JsonKadai07";
+				final String driverClassName = "com.mysql.jdbc.Driver";
+				final String url ="jdbc:mysql://192.168.54.190:3306/jsonkadai07";
+				final String user ="jsonkadai07";
+				final String password ="JsonKadai07";
 				
 				
-				int point = 0;
+				
 				
 				
 				try {
 					Class.forName(driverClassName);
+					
+					//DBと接続
 					Connection con = DriverManager.getConnection(url,user,password);
+					int point = 0;
+					
 					PreparedStatement st =
-							con.prepareStatement(
-									"select point from point_mst where  shop_id = ? and user_id = ?"
+							con.prepareStatement( //pointをselect
+									"select point from point_mst where tenpo_id = ? and user_id = ?"
 								); 
+					
 					PreparedStatement st2 =
-							con.prepareStatement(
+							//データないとき
+							con.prepareStatement( //データがないときpointに５００を設定して
 									"insert into point_mst values(?,?,500)"
 								); 
 					
-					String shop_id =request.getParameter("shop_id");
-					String user_id =request.getParameter("user_id");
+					//String shop_id =request.getParameter("TENPO_ID");
+					//String user_id =request.getParameter("USER_ID");
 					
-										
+					String shop_id = request.getParameter("TENPO_ID");
+					String user_id = request.getParameter("USER_ID");//qr
+					
+					//stのsqlに１，２に設定
 					st.setString(1, shop_id);
-					st.setString(2, user_id);			
+					st.setString(2, user_id);
+					
+					//stのsqlを実行
 					ResultSet rs = st.executeQuery();
 					
+					
+					//ポイントのデータがあったら
 					if(rs.next() == true) {
 						 point = rs.getInt("point");
+						 
+						 //データがないとき
 					}else {
+						
+						//st2に１，２を設定する
 						st2.setString(1,"shop_id");
 						st2.setString(2,"user_id");
 						
+						//st2のsqlを実行
 						st2.executeUpdate();
 					}
-					/*
-					 * // SQL���̎�s PreparedStatement pstmt =
-					 * con.prepareStatement("select * from point_mst"); ResultSet rs =
-					 * pstmt.executeQuery();
-					 */
-					// ����ʂ�\��
 					
 					
-					
-					// �㏈���i���\�[�X�̃N���[�Y�j
 					rs.close();
 					st.close();
 					con.close();
 					
+					request.setAttribute("point", point);
+					
+					//フォワード
+					RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/getPoint.jsp");
+					rd.forward(request, response);
+					
 				}catch (SQLException e ) {
-					// TODO �����������ꂽ catch �u���b�N
 					e.printStackTrace();
 				
 				} catch (ClassNotFoundException e ) {
@@ -111,38 +121,7 @@ public class GetPointServlet extends HttpServlet {​
 					
 				}
 
-				request.setAttribute("point", point);
-				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/getPoint.jsp");
-				rd.forward(request, response);
+				//pointをsetする
+				
 	}
 }
-
-/*
- * final String driverName = "TEAM07"; final String url =
- * "jdbc:oracle:thin:@192.168.54.190:3306/pdborcl"; final String id =
- * "jsonkadai07"; final String pass = "JsonKadai07";
- * 
- * try { Class.forName(driverName); java.sql.Connection
- * connection=DriverManager.getConnection(url,id,pass); PreparedStatement st =
- * connection.prepareStatement("select * from point_mst"); ResultSet result =
- * st.executeQuery();
- * 
- * java.util.List<String[]> list = new ArrayList<>(); while(resulut.next()==
- * true) { String[] s = new String[1]; s[0] = result.getString("kari");
- * list.add(s); }
- * 
- * for(String[] s: list) { System.out.println(s[0]); }
- * request.setAttribute("list", list); request.getRequestDispatcher("pass");
- * 
- * } catch (ClassNotFoundException e ) { // TODO �����������ꂽ catch �u���b�N
- * e.printStackTrace(); } catch (SQLException e ) { // TODO �����������ꂽ catch �u���b�N
- * e.printStackTrace(); }
- * 
- * String point ="POINT"; String num = "3580";
- * 
- * request.setAttribute("point", point); request.setAttribute("num", num);
- * 
- * RequestDispatcher rd =
- * request.getRequestDispatcher("/WEB-INF/jsp/getPoint.jsp");
- * rd.forward(request, response);
- */
