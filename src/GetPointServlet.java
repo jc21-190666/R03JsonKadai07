@@ -72,14 +72,12 @@ public class GetPointServlet extends HttpServlet {
 									"insert into point_mst values(?,?,500)"
 								); 
 					
-					//String shop_id =request.getParameter("TENPO_ID");
-					//String user_id =request.getParameter("USER_ID");
-					
-					String shop_id = request.getParameter("TENPO_ID");
-					String user_id = request.getParameter("USER_ID");//qr
+					String tenpo_id =request.getParameter("TENPO_ID");
+					String user_id =request.getParameter("USER_ID");
+
 					
 					//stのsqlに１，２に設定
-					st.setString(1, shop_id);
+					st.setString(1, tenpo_id);
 					st.setString(2, user_id);
 					
 					//stのsqlを実行
@@ -94,8 +92,9 @@ public class GetPointServlet extends HttpServlet {
 					}else {
 						
 						//st2に１，２を設定する
-						st2.setString(1,"shop_id");
-						st2.setString(2,"user_id");
+						st2.setString(1,tenpo_id);
+						st2.setString(2,user_id);
+						point  = 500;
 						
 						//st2のsqlを実行
 						st2.executeUpdate();
